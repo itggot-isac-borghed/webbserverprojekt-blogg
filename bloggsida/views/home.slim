@@ -1,0 +1,17 @@
+h1 Superbloggare
+
+-if session[:account] != nil
+    p="Välkommen #{session[:account]}"
+    a href="/#{session[:account]}"
+        p Profil
+    a href="/blogs/#{session[:account]}"
+        p Din blogg
+-else
+    a href="/login"
+        p Logga in
+
+a href="/blogs"
+    p Alla bloggar
+
+h2 Om sidan
+p="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id turpis non eros viverra euismod.Duis dignissim efficitur magna, in convallis magna cursus at. Phasellus quis metus in nisl consequat porttitor non at libero. Pellentesque vitae enim nunc. Donec faucibus lorem nec velit lacinia, a congue metus tristique. Integer eget neque et nibh faucibus ornare non quis dui. Nullam fermentum a urna nec faucibus. Mauris eget ligula nec ipsum lobortis tempor sed et nulla. Nullam sed fringilla justo, non tristique eros. Vivamus ultrices pharetra ipsum, et faucibus elit maximus mattis. Fusce rhoncus maximus sem, eget auctor velit auctor id. Vivamus ut egestas est, in ultrices leo. In scelerisque tortor id justo rutrum dignissim. Cras consectetur elit quis vestibulum convallis. Ut nec dictum libero, eleifend scelerisque dui."
