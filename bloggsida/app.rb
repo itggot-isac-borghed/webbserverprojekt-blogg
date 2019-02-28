@@ -48,14 +48,17 @@ post('/signup') do
 end
 
 get('/blogs') do
-    slim(:blogs)
+    db = SQLite3::Database.new("db/databas.db")
+    db.results_as_hash = true
+    bloggar = db.execute('SELECT Titel,Ägare FROM Bloggar')
+    slim(:blogs, locals:{lista:bloggar})
 end
 
 get('/myblog') do
     db = SQLite3::Database.new("db/databas.db")
     db.results_as_hash = true
     titel = db.execute('SELECT Titel FROM Bloggar WHERE Ägare=?', session[:account])
-    inlägg=[]
+    inlägg = []
     if titel != []
         id = db.execute('SELECT Id FROM Bloggar WHERE Ägare=?', session[:account])
         session[:blog] = titel
@@ -75,7 +78,10 @@ post('/newpost') do
     db = SQLite3::Database.new("db/databas.db")
     db.results_as_hash = true
     id = db.execute('SELECT Id FROM Bloggar WHERE Ägare=?', session[:account])
-    db.execute('INSERT INTO Inlägg(Titel, Info, BloggId) VALUES(?, ?, ?)', params["Title"], params["Info"], id[0]["Id"])
+    if params["Img"] == ""
+        params["Img"] = nil
+    end
+    db.execute('INSERT INTO Inlägg(Titel, Info, BloggId, BildLänk) VALUES(?, ?, ?, ?)', params["Title"], params["Info"], id[0]["Id"], params["Img"])
     redirect('/myblog')
 end
 
