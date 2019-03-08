@@ -1,23 +1,8 @@
--if session[:blog] == nil
-    h1 Oj, här var det tomt.
-    h2 Skapa din blogg nu!
-    form action="/createblog" method="post"
-        input type="text" name="Title" placeholder="Titel"
-        input type="submit" value="Skapa din blogg!"
-    a href="/"
-        p Hem
-
--if session[:blog] != nil
-    h1="Bloggen #{session[:blog][0]["Titel"]}"
-    a href="/"
-        p Hem
-    form action="/newpost" method="post"
-        input type="text" name="Title" placeholder="Titel"
-        input type="text" name="Info" placeholder="Skriv ditt inlägg"
-        input type="text" name="Img" placeholder="Eventuell bildlänk här"
-        input type="submit" value="Skapa inlägg"
-    h2 Alla inlägg
-    -lista.each_with_index do |info,a|
-        h3="#{info["Titel"]}"
-        p="#{info["Info"]}"
-        
+h1="Bloggen #{blogg[0]["Titel"]}"
+h2="Av: #{blogg[0]["Ägare"]}"
+a href="/"
+    p Hem
+h2 Alla inlägg
+-lista.each_with_index do |info,a|
+    h3="#{info["Titel"]}"
+    p="#{info["Info"]}"

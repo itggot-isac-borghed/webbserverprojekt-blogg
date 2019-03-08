@@ -1,6 +1,13 @@
 h1 Alla bloggar
 a href="/" Hem
-p = "#{lista}"
+-if session[:account] != nil
+    a href="/myblog"
+        h3 = "Din blogg"
+
+h2 Lista
 
 -lista.each_with_index do |blogg, i|
-    p=
+    -if blogg["Ägare"] != session[:account]
+        a href="/blogs/#{blogg["Titel"]}"
+            h3 = "#{blogg["Titel"]}"
+        p = "Av: #{blogg["Ägare"]}"
