@@ -6,3 +6,5 @@ h2 Alla inlägg
 -lista.each_with_index do |info,a|
     h3="#{info["Titel"]}"
     p="#{info["Info"]}"
+    -if info["BildLänk"] != nil
+        img src="#{info["BildLänk"]}"

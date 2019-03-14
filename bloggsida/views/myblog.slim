@@ -11,15 +11,17 @@
     h1="Bloggen #{session[:blog][0]["Titel"]}"
     a href="/"
         p Hem
-    form action="/newpost" method="post"
+    form action="/newpost" method="post" enctype="multipart/form-data"
         input type="text" name="Title" placeholder="Titel"
         input type="text" name="Info" placeholder="Skriv ditt inlägg"
-        input type="text" name="Img" placeholder="Eventuell bildlänk här"
+        input type="file" name="file"
         input type="submit" value="Skapa inlägg"
     h2 Alla inlägg
     -lista.each_with_index do |info,a|
         h3="#{info["Titel"]}"
         p="#{info["Info"]}"
+        -if info["BildLänk"] != nil
+            img src="#{info["BildLänk"]}"
         form action="/edit/#{info["Id"]}" method="get"
             input type="submit" value="Redigera inlägg"
         form action="/delete/#{info["Id"]}" method="post"
