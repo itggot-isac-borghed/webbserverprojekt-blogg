@@ -21,7 +21,7 @@
         h3="#{info["Titel"]}"
         p="#{info["Info"]}"
         -if info["BildLänk"] != nil
-            img src="#{info["BildLänk"]}"
+            img src="/#{info["BildLänk"]}"
         form action="/edit/#{info["Id"]}" method="get"
             input type="submit" value="Redigera inlägg"
         form action="/delete/#{info["Id"]}" method="post"

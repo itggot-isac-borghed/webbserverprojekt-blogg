@@ -1,8 +1,8 @@
 h1 Redigera inlägg
 a href="/myblog" Tillbaka
 
-form action="/edit/#{post[0]["Id"]}" method="post" enctype="multipart/form-data">
+form action="/edit/#{post[0]["Id"]}" method="post" enctype="multipart/form-data"
     input type="text" name="Title" value="#{post[0]["Titel"]}"
     input type="text" name="Info" value="#{post[0]["Info"]}"
-    <input type="file" name="file">
+    input type="file" name="file"
     input type="submit" value="Redigera inlägg"

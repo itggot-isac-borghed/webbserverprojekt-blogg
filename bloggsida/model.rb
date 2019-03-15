@@ -66,6 +66,7 @@ def edit(blog, account, params)
     if blog[0]["Id"] != inlägg[0]["BloggId"]
         return false
     end
+    return inlägg
 end
 
 def updatepost(params)
