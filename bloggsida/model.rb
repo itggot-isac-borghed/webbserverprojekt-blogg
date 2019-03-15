@@ -24,6 +24,19 @@ def register(params)
     end
 end
 
+def profil(params)
+    db = SQLite3::Database.new("db/databas.db")
+    db.results_as_hash = true
+    info = db.execute('SELECT Namn,Mail,Om FROM Användare WHERE Namn=?', params["account"])
+    return info
+end
+
+def editprofil(params)
+    db = SQLite3::Database.new("db/databas.db")
+    db.results_as_hash = true
+    db.execute('UPDATE Användare SET Om=? WHERE Namn=?', params["about"], params["account"])
+end
+
 def bloggar()
     db = SQLite3::Database.new("db/databas.db")
     db.results_as_hash = true

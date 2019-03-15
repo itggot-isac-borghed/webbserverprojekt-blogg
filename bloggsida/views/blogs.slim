@@ -10,4 +10,5 @@ h2 Lista
     -if blogg["Ägare"] != session[:account]
         a href="/blogs/#{blogg["Titel"]}"
             h3 = "#{blogg["Titel"]}"
-        p = "Av: #{blogg["Ägare"]}"
+        a href="/profile/#{blogg["Ägare"]}"
+            p = "Av: #{blogg["Ägare"]}"

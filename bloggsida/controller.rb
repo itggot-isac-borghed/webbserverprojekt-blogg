@@ -6,7 +6,7 @@ require_relative 'model.rb'
 enable :sessions
 
 configure do
-    set :secured_route, ["/edit", "/delete/:id", "/createblog", "/edit/:id", "/newpost", "/myblog"]
+    set :secured_route, ["/edit", "/delete/:id", "/createblog", "/edit/:id", "/newpost", "/myblog", "/profile/:account/edit"]
 end
 
 before do
@@ -53,11 +53,17 @@ post('/signup') do
     end
 end
 
-get('/profile') do
-    db = SQLite3::Database.new("db/databas.db")
-    db.results_as_hash = true
-    info = db.execute('SELECT Namn,Mail FROM Användare WHERE Namn=?', session[:account])
+get('/profile/:account') do
+    info = profil(params)
     slim(:profil, locals:{user:info})
+end
+
+post('/profile/:account/edit') do
+    if params["account"] != session[:account]
+        halt 403
+    end
+    editprofil(params)
+    redirect("/profile/#{params["account"]}")
 end
 
 get('/blogs') do

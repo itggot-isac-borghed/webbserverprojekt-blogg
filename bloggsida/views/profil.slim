@@ -1,2 +1,19 @@
 h1="#{user[0]["Namn"]}"
 a href="/" Hem
+
+-if session[:account] != user[0]["Namn"]
+    -if user[0]["Om"] == nil
+        p Oj här var det tomt!
+-if user[0]["Om"] != nil
+    p="Om #{user[0]["Namn"]}:"
+    p="#{user[0]["Om"]}"
+-if session[:account] == user[0]["Namn"]
+    -if user[0]["Om"] == nil
+        p Oj här var det tomt! Skriv gärna något om dig själv.
+        form action="/profile/#{session[:account]}/edit" method="post"
+            input type="text" name="about" placeholder="Information om dig!"
+            input type="submit" value="Skicka in"
+    h3 Redigera profil
+    form action="/profile/#{session[:account]}/edit" method="post"
+            input type="text" name="about" placeholder="Information om dig!"
+            input type="submit" value="Skicka in"
